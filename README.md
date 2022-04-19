@@ -6,7 +6,7 @@ A Github Action that removes the latest commit from the history and moves it to 
 ```yml
       - uses: actions/checkout@v3
         with:
-        fetch-depth: 0
+            fetch-depth: 0
       - name: Move Latest Commit to PR
         uses: fabriziocacicia/move-latest-commit-to-pr-action@0.1.0
 ```
@@ -26,3 +26,43 @@ All inputs are **optional**.
 | assignee | The Github user to which the PR is assigned. | The username of the author of the removed commit. |
 
 
+## Examples
+
+### Custom head branch
+```yml
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+      - name: Move Latest Commit to PR
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@0.1.0
+        with:
+            headBranch: removed_commits
+```
+This will create a new branch named `removed_commits/48fnv479`, where `48fnv479` is the hash of the commit that will be removed.
+
+### Default head branch
+```yml
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+      - name: Move Latest Commit to PR
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@0.1.0
+        with:
+            headBranch: removed_commits
+```
+In this case the new branch will be named `48fnv479`, where `48fnv479` is the hash of the commit that will be removed.
+
+### Custom PR body
+```yml
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+      - name: Move Latest Commit to PR
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@0.1.0
+        with:
+            headBranch: removed_commits
+            prBody: |
+                  This is the body of the Pull Request.
+                  It can be multiline.
+```
+Notice that it is possible to specify a multiline body for the PR.
