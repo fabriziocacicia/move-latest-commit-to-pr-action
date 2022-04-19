@@ -1,3 +1,3 @@
 # Move Latest Commit to PR
-A Github Action that remove the latest commit from the history and move it to a Pull Request
+A Github Action that removes the latest commit from the history and moves it to a Pull Request
 
