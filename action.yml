@@ -12,9 +12,9 @@ inputs:
     required: false
     default: ''
   baseBranch:
-    description: 'The branch to which the PR will merge. (default is main)'
+    description: 'The branch to which the PR will merge. (default is the default branch of the repository)'
     required: false
-    default: 'main'
+    default: ${{ github.event.repository.default_branch }}
   headBranch:
     description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'
     required: false
