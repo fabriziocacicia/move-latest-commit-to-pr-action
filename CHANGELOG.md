@@ -1,4 +1,4 @@
-## Unreleased 
+## 0.2.0
 
 - Updated the default value of `baseBranch` input to the default branch of the repository
 
