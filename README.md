@@ -21,7 +21,7 @@ All inputs are **optional**.
 | --- | --- | --- |
 | prTitle | The title of the PR. | The message of the removed commit. |
 | prBody | The body of the PR. | The commit $LATEST_COMMIT_HASH has been removed from the repository history and moved to this Pull Request. |
-| baseBranch | The base branch of the PR. | `main` |
+| baseBranch | The base branch of the PR. | The default branch of the repo. |
 | headBranch | The name of the branch that will be created and from which the PR will be created. It will be suffixed with the hash of the removed commit (i.e. head_branch_name/hash | The hash of the removed commit. |
 | assignee | The Github user to which the PR is assigned. | The username of the author of the removed commit. |
 
