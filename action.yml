@@ -6,7 +6,6 @@ inputs:
   prTitle:
     description: 'The title of the PR. (default is the message of the commit that will be moved)'
     required: false
-    default: ''
   prBody:
     description: 'The body of the PR'
     required: false
