@@ -30,20 +30,21 @@ runs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+    - name: Set prTitle
+      id: pr_title
+      run: |
+        pr_title=${{ inputs.prTitle }}
+        
+        if [ -z $pr_title ]; then
+          LATEST_COMMIT_MESSAGE=$(git log -1 --format=%B)
+          pr_title=$LATEST_COMMIT_MESSAGE
+        fi
+        echo "::set-output name=value::$pr_title"
+      shell: bash
     - name: Prepare Pull Request
       id: prepare_pr
       run: |
         LATEST_COMMIT_HASH=$(git log -1 --format=%h)
-        
-        
-        if [ -z "${{ inputs.prTitle }}" ]       
-        then
-          LATEST_COMMIT_MESSAGE=$(git log -1 --format=%B)
-          PR_TITLE=$LATEST_COMMIT_MESSAGE
-        else
-          PR_TITLE=$(${{ inputs.prTitle }})
-        fi
-        echo "::set-output name=PR_TITLE::$PR_TITLE"
         
         
         if [ -z "${{ inputs.prBody }}" ]
@@ -81,5 +82,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ steps.prepare_pr.outputs.pr_title }}" --base ${{ inputs.baseBranch }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.pr_title.outputs.value }}" --base ${{ inputs.baseBranch }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash
