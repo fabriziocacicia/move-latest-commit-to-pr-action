@@ -9,7 +9,6 @@ inputs:
   prBody:
     description: 'The body of the PR'
     required: false
-    default: ''
   baseBranch:
     description: 'The branch to which the PR will merge. (default is the default branch of the repository)'
     required: false
