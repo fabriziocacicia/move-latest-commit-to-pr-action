@@ -15,7 +15,6 @@ inputs:
   headBranch:
     description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'
     required: false
-    default: ''
   assignee:
     description: 'The assignee of the Pull Request. (defualt value is the author of the latest commit)'
     required: false
