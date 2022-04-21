@@ -10,9 +10,8 @@ inputs:
     description: 'The body of the PR'
     required: false
   baseBranch:
-    description: 'The branch to which the PR will merge. (default is the default branch of the repository)'
+    description: 'The branch to which the PR will merge. (default is the ref branch of the triggering event, i.e. in case of push is the branch where the commit was pushed)'
     required: false
-    default: ${{ github.event.repository.default_branch }}
   headBranch:
     description: 'The base name of the branch that creates the PR. It will be suffixed by the latest commit hash (i.e. branch_name/hash). (default is the hash of the latest commit)'
     required: false
@@ -28,6 +27,19 @@ runs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+   $- name: Get branch name
+      id: branch-name
+      uses: tj-actions/branch-names@v5.2
+    - name: Set baseBranch
+      id: base_branch
+      run: |
+        base_branch=${{ inputs.baseBranch }}
+        
+        if [ -z $base_branch ]; then
+          base_branch=${{ steps.branch-name.outputs.current_branch }}
+        fi
+        echo "::set-output name=value::$base_branch"
+      shell: bash  
     - name: Set prTitle
       id: pr_title
       run: |
@@ -80,5 +92,5 @@ runs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
-        gh pr create --title "${{ steps.pr_title.outputs.value }}" --base ${{ inputs.baseBranch }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
+        gh pr create --title "${{ steps.pr_title.outputs.value }}" --base ${{ steps.base_branch.outputs.value }} --head "${{ steps.prepare_pr.outputs.head_branch_name }}" --assignee ${{ inputs.assignee }} --body "${{ steps.prepare_pr.outputs.prbody }}"
       shell: bash
