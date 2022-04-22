@@ -83,7 +83,7 @@ runs:
         chmod +x $GITHUB_ACTION_PATH/create_new_branch.sh
         $GITHUB_ACTION_PATH/create_new_branch.sh -b $HEAD_BRANCH_NAME
       shell: bash
-    - run: git checkout main
+    - run: git checkout ${{ steps.base_branch.outputs.value }}
       shell: bash
     - name: Undo Last Commit
       uses: fabriziocacicia/undo-latest-commit-action@v0.1.0
