@@ -8,7 +8,7 @@ A Github Action that removes the latest commit from the history and moves it to 
         with:
             fetch-depth: 0
       - name: Move Latest Commit to PR
-        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.2.0
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.3.0
 ```
 
 Without any inputs, the action will create and push a new branch names as the hash of the will be removed, will create a Pull Request (named as the commit message of that commit) based on the new branch and with the `main` branch as base. It will also assign the commit author as assignee of the PR.
@@ -34,7 +34,7 @@ All inputs are **optional**.
         with:
             fetch-depth: 0
       - name: Move Latest Commit to PR
-        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.2.0
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.3.0
         with:
             headBranch: removed_commits
 ```
@@ -46,7 +46,7 @@ This will create a new branch named `removed_commits/48fnv479`, where `48fnv479`
         with:
             fetch-depth: 0
       - name: Move Latest Commit to PR
-        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.2.0
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.3.0
         with:
             headBranch: removed_commits
 ```
@@ -58,7 +58,7 @@ In this case the new branch will be named `48fnv479`, where `48fnv479` is the ha
         with:
             fetch-depth: 0
       - name: Move Latest Commit to PR
-        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.2.0
+        uses: fabriziocacicia/move-latest-commit-to-pr-action@v0.3.0
         with:
             headBranch: removed_commits
             prBody: |
