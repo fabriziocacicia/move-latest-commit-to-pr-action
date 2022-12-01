@@ -28,7 +28,7 @@ runs:
         fetch-depth: 0
     - name: Get branch name
       id: branch-name
-      uses: tj-actions/branch-names@v5.2
+      uses: tj-actions/branch-names@v6.3
     - name: Set baseBranch
       id: base_branch
       run: |
